@@ -33,7 +33,7 @@ class CustomerController extends Controller
      */
     public function create(Request $request)
     {
-        dd($request->all());
+//        dd($request->all());
         $customer = new Customer();
         $customer->name	= $request->get('name');
         $customer->save();
