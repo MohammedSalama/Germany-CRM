@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\Models\Project;
+use App\Http\Controllers\Controller;
+use App\Models\Note;
 use Illuminate\Http\Request;
 
-class ProjectController extends Controller
+class NoteController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +35,7 @@ class ProjectController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Project $project)
+    public function show(Note $note)
     {
         //
     }
@@ -42,7 +43,7 @@ class ProjectController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Project $project)
+    public function edit(Note $note)
     {
         //
     }
@@ -50,7 +51,7 @@ class ProjectController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Project $project)
+    public function update(Request $request, Note $note)
     {
         //
     }
@@ -58,7 +59,7 @@ class ProjectController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Project $project)
+    public function destroy(Note $note)
     {
         //
     }
