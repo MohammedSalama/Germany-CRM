@@ -5,62 +5,96 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Note;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class NoteController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * @param Request $request
+     * @param $customerId
+     * @return mixed
      */
-    public function index()
+    public function index(Request $request, $customerId)
     {
-        //
+        return Note::where('customer_id',$customerId)->get();
     }
 
     /**
-     * Show the form for creating a new resource.
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function create()
+    public function show($id)
     {
-        //
+        return Note::find($id) ?? response()->json(['status' => 'Not Found'] , Response::HTTP_NOT_FOUND);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * @param Request $request
+     * @param $customerId
+     * @return Note
      */
-    public function store(Request $request)
+    public function create(Request $request,$customerId)
     {
-        //
+//        dd($request->all());
+        $note = new Note();
+        $note->note	= $request->get('note');
+        $note->customer_id	= $customerId;
+
+        $note->save();
+        return $note;
+
     }
 
     /**
-     * Display the specified resource.
+     * @param Request $request
+     * @param $id
+     * @param $customerId
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function show(Note $note)
+    public function update(Request $request, $id , $customerId)
     {
-        //
+        $note = Note::find($id);
+
+        if (!$note)
+        {
+            return response()->json(['status' => 'Not Found'] , Response::HTTP_NOT_FOUND);
+        }
+
+        $customerId = (int) $customerId;
+
+        if ($note->customer_id !== $customerId)
+        {
+            return response()->json(['status' => 'Invalid Data'] , Response::HTTP_BAD_REQUEST);
+        }
+
+        $note->note	= $request->get('note');
+        $note->save();
+        return $note;
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * @param Request $request
+     * @param $customerId
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function edit(Note $note)
+    public function delete(Request $request, $customerId ,$id)
     {
-        //
-    }
+        $note = Note::find($id);
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Note $note)
-    {
-        //
-    }
+        if (!$note)
+        {
+            return response()->json(['status' => 'Not Found'] , Response::HTTP_NOT_FOUND);
+        }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Note $note)
-    {
-        //
+        $customerId = (int) $customerId;
+
+        if ($note->customer_id !== $customerId)
+        {
+            return response()->json(['status' => 'Invalid Data'] , Response::HTTP_BAD_REQUEST);
+        }
+
+        $note->delete();
+        return response()->json(['status' => 'Deleted'] , Response::HTTP_OK);
     }
 }
