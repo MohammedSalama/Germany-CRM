@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateCustomer;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -31,7 +32,7 @@ class CustomerController extends Controller
      * @param Request $request
      * @return Customer
      */
-    public function create(Request $request)
+    public function create(CreateCustomer $request)
     {
 //        dd($request->all());
         $customer = new Customer();
