@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Requests;
+namespace Crm\Base\Requests;
 
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Validation\ValidationException;
+use function response;
 
 abstract class ApiRequest extends FormRequest
 {
