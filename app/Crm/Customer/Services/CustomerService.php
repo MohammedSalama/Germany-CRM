@@ -2,14 +2,13 @@
 
 namespace Crm\Customer\Services;
 
-use App\Http\Requests\CreateCustomer;
-use App\Models\Customer;
+use Crm\Customer\Models\Customer;
+use Crm\Customer\Requests\CreateCustomer;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class CustomerService
 {
-
     /**
      * @param Request $request
      * @return \Illuminate\Database\Eloquent\Collection
@@ -29,7 +28,7 @@ class CustomerService
     }
 
     /**
-     * @param Request $request
+     * @param CreateCustomer $request
      * @return Customer
      */
     public function create(CreateCustomer $request)
@@ -65,7 +64,7 @@ class CustomerService
      * @param $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function delete(Request $request, $id)
+    public function delete(Request $request, int $id)
     {
         $customer = Customer::find($id);
 
