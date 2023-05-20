@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Requests;
+namespace Crm\Customer\Requests;
 
 use Crm\Base\Requests\ApiRequest;
 
