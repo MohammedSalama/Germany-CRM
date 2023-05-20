@@ -2,6 +2,7 @@
 
 namespace Crm\Customer\Services;
 
+use Crm\Customer\Events\CustomerCreation;
 use Crm\Customer\Models\Customer;
 use Crm\Customer\Requests\CreateCustomer;
 use Illuminate\Http\Request;
@@ -31,12 +32,14 @@ class CustomerService
      * @param CreateCustomer $request
      * @return Customer
      */
-    public function create(CreateCustomer $request)
+    public function create(string $name)
     {
 //        dd($request->all());
         $customer = new Customer();
-        $customer->name	= $request->get('name');
+        $customer->name	= $name;
         $customer->save();
+
+        event(new CustomerCreation($customer));
         return $customer;
     }
 

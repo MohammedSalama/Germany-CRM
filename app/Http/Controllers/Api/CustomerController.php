@@ -48,7 +48,7 @@ class CustomerController extends Controller
     public function create(CreateCustomer $request)
     {
 //        dd($request->all());
-        return $this->customerService->create($request);
+        return $this->customerService->create($request->name);
     }
 
     /**
