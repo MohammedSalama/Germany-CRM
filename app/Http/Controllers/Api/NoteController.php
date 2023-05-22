@@ -41,8 +41,8 @@ class NoteController extends Controller
         $note->customer_id	= $customerId;
 
         $note->save();
-        return $note;
 
+        return $note;
     }
 
     /**
@@ -68,6 +68,7 @@ class NoteController extends Controller
         }
 
         $note->note	= $request->get('note');
+
         $note->save();
         return $note;
     }
