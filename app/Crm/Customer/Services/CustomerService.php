@@ -25,7 +25,7 @@ class CustomerService
      */
     public function show($id)
     {
-        return Customer::find($id) ?? response()->json(['status' => 'Not Found'] , Response::HTTP_NOT_FOUND);
+        return Customer::find($id);
     }
 
     /**
@@ -59,6 +59,8 @@ class CustomerService
 
         $customer->name	= $request->get('name');
         $customer->save();
+        event(new CustomerCreation($customer));
+
         return $customer;
     }
 
@@ -77,6 +79,9 @@ class CustomerService
         }
 
         $customer->delete();
+
+        event(new CustomerCreation($customer));
+
         return response()->json(['status' => 'Deleted'] , Response::HTTP_OK);
     }
 }

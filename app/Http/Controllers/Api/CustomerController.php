@@ -7,6 +7,7 @@ use Crm\Customer\Models\Customer;
 use Crm\Customer\Requests\CreateCustomer;
 use Crm\Customer\Services\CustomerService;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class CustomerController extends Controller
 {
@@ -38,7 +39,7 @@ class CustomerController extends Controller
      */
     public function show($id)
     {
-        return $this->customerService->show($id);
+        return $this->customerService->show($id) ?? response()->json(['status' => 'Not Found'] , Response::HTTP_NOT_FOUND);
     }
 
     /**

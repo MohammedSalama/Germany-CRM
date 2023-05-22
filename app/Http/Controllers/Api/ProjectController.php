@@ -3,64 +3,85 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Crm\Customer\Models\Project;
+use Crm\Customer\Services\CustomerService;
+use Crm\Project\Models\Project;
+use Crm\Project\Requests\CreateProject;
+use Crm\Project\Services\ProjectService;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class ProjectController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * @var ProjectService
      */
-    public function index()
+    private ProjectService $projectService;
+
+    private CustomerService $customerService;
+    /**
+     * @param ProjectService $projectService
+     */
+    public function __construct(ProjectService $projectService , CustomerService $customerService)
     {
-        //
+        $this->projectService = $projectService;
+        $this->customerService = $customerService;
     }
 
     /**
-     * Show the form for creating a new resource.
+     * @param Request $request
+     * @param $customerId
+     * @return mixed
      */
-    public function create()
+    public function index(Request $request, $customerId)
     {
-        //
+//        dd($request);
+        return $this->projectService->index($request , $customerId);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request)
+    public function show($id)
     {
-        //
+        return $this->projectService->show($id);
     }
 
     /**
-     * Display the specified resource.
+     * @param CreateProject $request
+     * @param $customerId
+     * @return Project
      */
-    public function show(Project $project)
+    public function create(CreateProject $request , $customerId)
     {
-        //
+        $customer = $this->customerService->show($customerId);
+
+        if (! $customer) {
+            return response()->json(['status' => 'Customer Not Found'] , Response::HTTP_NOT_FOUND);
+        }
+        return $this->projectService->create($request , $customerId);
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * @param Request $request
+     * @param $id
+     * @param $customerId
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function edit(Project $project)
+    public function update(Request $request, $id , $customerId)
     {
-        //
+//        dd($request);
+        return $this->projectService->update($request , $id , $customerId);
     }
 
     /**
-     * Update the specified resource in storage.
+     * @param Request $request
+     * @param $customerId
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, Project $project)
+    public function delete(Request $request, $customerId ,$id)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Project $project)
-    {
-        //
+        return $this->projectService->delete($request , $customerId , $id);
     }
 }
