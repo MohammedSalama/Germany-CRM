@@ -86,7 +86,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Khaled\"\r\n}",
+							"raw": "{\r\n    \"name\": \"bate5a\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -161,13 +161,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/customers/1/notes",
+							"raw": "{{base_url}}/customers/2/notes",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"customers",
-								"1",
+								"2",
 								"notes"
 							]
 						}
@@ -443,14 +443,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/customers/2/project/1",
+							"raw": "{{base_url}}/customers/1/projects/1",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"customers",
-								"2",
-								"project",
+								"1",
+								"projects",
 								"1"
 							]
 						}
