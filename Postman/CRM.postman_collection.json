@@ -11,9 +11,44 @@
 			"item": [
 				{
 					"name": "all_customers",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "{{base_url}}/customers",
 							"host": [
@@ -32,13 +67,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/customers/1",
+							"raw": "{{base_url}}/customers/6",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"customers",
-								"1"
+								"6"
 							]
 						}
 					},
@@ -51,7 +86,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Muhammed\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Khaled\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -174,13 +209,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/customers/1/notes",
+							"raw": "{{base_url}}/customers/2/notes",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"customers",
-								"1",
+								"2",
 								"notes"
 							]
 						}
@@ -193,15 +228,15 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/customers/1/notes/1",
+							"raw": "{{base_url}}/customers/2/notes/3",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"customers",
-								"1",
+								"2",
 								"notes",
-								"1"
+								"3"
 							]
 						}
 					},
@@ -214,7 +249,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"note\":\"Hello\"\r\n}",
+							"raw": "{\r\n    \"note\":\"Hello World\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -222,14 +257,373 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/customers/1/notes/1",
+							"raw": "{{base_url}}/customers/2/notes/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"customers",
+								"2",
+								"notes",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Projects",
+			"item": [
+				{
+					"name": "allCustomersProject",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/customers/1/projects",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"customers",
 								"1",
-								"notes",
+								"projects"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CustomerProjectsById",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/customers/1/projects/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"customers",
+								"1",
+								"projects",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateCustomerProject",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"project_name\": \"Read\",\r\n    \"status\": \"1\",\r\n    \"project_cost\": 40\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/customers/2/projects",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"customers",
+								"2",
+								"projects"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteCustomerProject",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/customers/1/projects/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"customers",
+								"1",
+								"projects",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateCustomerProject",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"project_name\": \"CustomerServices\",\r\n    \"status\": \"0\",\r\n    \"project_cost\" : 30\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/customers/2/project/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"customers",
+								"2",
+								"project",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Invoices",
+			"item": [
+				{
+					"name": "allCustomersInvoice",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/customers/2/invoices",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"customers",
+								"2",
+								"invoices"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CustomerInvoiceById",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/customers/2/invoices/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"customers",
+								"2",
+								"invoices",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateCustomerInvoice",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"total\": 30.50,\r\n    \"items\": 9,\r\n    \"status\" : 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/customers/2/invoices",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"customers",
+								"2",
+								"invoices"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteCustomerInvoice",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/customers/1/invoices/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"customers",
+								"1",
+								"invoices",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateCustomerInvoice",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"total\": 37.50,\r\n    \"items\": 5,\r\n    \"status\" : 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/customers/2/invoices/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"customers",
+								"2",
+								"invoices",
 								"1"
 							]
 						}
