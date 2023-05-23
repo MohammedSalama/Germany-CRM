@@ -17,7 +17,11 @@ class ProjectController extends Controller
      */
     private ProjectService $projectService;
 
+    /**
+     * @var CustomerService
+     */
     private CustomerService $customerService;
+
     /**
      * @param ProjectService $projectService
      */
@@ -49,10 +53,10 @@ class ProjectController extends Controller
 
     /**
      * @param CreateProject $request
-     * @param $customerId
-     * @return Project
+     * @param int $customerId
+     * @return Project|\Illuminate\Http\JsonResponse
      */
-    public function create(CreateProject $request , $customerId)
+    public function create(CreateProject $request , int $customerId)
     {
         $customer = $this->customerService->show($customerId);
 
