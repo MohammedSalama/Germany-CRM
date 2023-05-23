@@ -22,7 +22,7 @@ class CreateCustomer extends ApiRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|unique|min:3'
+            'name' => 'required|min:3'
         ];
     }
 }
