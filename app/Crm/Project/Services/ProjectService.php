@@ -69,14 +69,14 @@ class ProjectService
         {
             return response()->json(['status' => 'Invalid Data'] , Response::HTTP_BAD_REQUEST);
         }
+
         $project->project_name = $request->get('project_name');
         $project->status = $request->get('status');
-        $project->customer_id = $request->get('customer_id');
         $project->project_cost = $request->get('project_cost');
 
         $project->save();
 
-        event(new ProjectCreation($project));
+        event(new ProjectService($project));
 
         return $project;
     }
