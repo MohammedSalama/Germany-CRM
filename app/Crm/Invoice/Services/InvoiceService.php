@@ -1,14 +1,15 @@
 <?php
 
-namespace Crm\Note\Services;
+namespace Crm\Invoice\Services;
 
-use Crm\Note\Models\Note;
-use Crm\Note\Requests\CreateNote;
+use Crm\Invoice\Models\Invoice;
+use Crm\Invoice\Requests\CreateInvoice;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-class NoteService
+class InvoiceService
 {
+
     /**
      * @param Request $request
      * @param $customerId
@@ -16,7 +17,7 @@ class NoteService
      */
     public function index(Request $request, $customerId)
     {
-        return Note::where('customer_id',$customerId)->get();
+        return Invoice::where('customer_id', $customerId)->get();
     }
 
     /**
@@ -25,26 +26,29 @@ class NoteService
      */
     public function show($id)
     {
-        return Note::find($id) ?? response()->json(['status' => 'Not Found'] , Response::HTTP_NOT_FOUND);
+//        dd($id);
+        return Invoice::find($id) ?? response()->json(['status' => 'Not Found'] , Response::HTTP_NOT_FOUND);
     }
 
     /**
-     * @param CreateNote $request
+     * @param Request $request
      * @param int $customerId
-     * @return Note
+     * @return Invoice
      */
-    public function create(CreateNote $request, int $customerId)
+    public function create(CreateInvoice $request , int $customerId)
     {
-//        dd($request->all());
-        $note = new Note();
-        $note->note	= $request->get('note');
-        $note->customer_id	= $customerId;
+        $invoice = new Invoice();
+        $invoice->total	= $request->get('total');
+        $invoice->items	= $request->get('items');
+        $invoice->status = $request->get('status');
 
-        $note->save();
+        $invoice->customer_id	= $customerId;
 
-        event(new NoteService($note));
+        $invoice->save();
 
-        return $note;
+        event(new InvoiceService($invoice));
+
+        return $invoice;
     }
 
     /**
@@ -55,24 +59,26 @@ class NoteService
      */
     public function update(Request $request, $id , $customerId)
     {
-        $note = Note::find($id);
+        $invoice = Invoice::find($id);
 
-        if (!$note)
+        if (!$invoice)
         {
             return response()->json(['status' => 'Not Found'] , Response::HTTP_NOT_FOUND);
         }
 
         $customerId = (int) $customerId;
 
-        if ($note->customer_id !== $customerId)
+        if ($invoice->customer_id !== $customerId)
         {
             return response()->json(['status' => 'Invalid Data'] , Response::HTTP_BAD_REQUEST);
         }
 
-        $note->note	= $request->get('note');
+        $invoice->total	= $request->get('total');
+        $invoice->items	= $request->get('items');
+        $invoice->status = $request->get('status');
 
-        $note->save();
-        return $note;
+        $invoice->save();
+        return $invoice;
     }
 
     /**
@@ -83,21 +89,21 @@ class NoteService
      */
     public function delete(Request $request, $customerId ,$id)
     {
-        $note = Note::find($id);
+        $invoice = Invoice::find($id);
 
-        if (!$note)
+        if (!$invoice)
         {
             return response()->json(['status' => 'Not Found'] , Response::HTTP_NOT_FOUND);
         }
 
         $customerId = (int) $customerId;
 
-        if ($note->customer_id !== $customerId)
+        if ($invoice->customer_id !== $customerId)
         {
             return response()->json(['status' => 'Invalid Data'] , Response::HTTP_BAD_REQUEST);
         }
 
-        $note->delete();
+        $invoice->delete();
         return response()->json(['status' => 'Deleted'] , Response::HTTP_OK);
     }
 }

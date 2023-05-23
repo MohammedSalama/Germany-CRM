@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\CustomerController;
+use App\Http\Controllers\Api\InvoiceController;
 use App\Http\Controllers\Api\NoteController;
 use App\Http\Controllers\Api\ProjectController;
 use Illuminate\Http\Request;
@@ -50,4 +51,13 @@ Route::patch('customers/{customerId}/projects/{id}',[ProjectController::class,'u
 Route::delete('customers/{customerId}/projects/{id}',[ProjectController::class,'delete']);
 Route::post('customers/{customerId}/projects',[ProjectController::class,'create']);
 Route::get('customers/{customerId}/projects',[ProjectController::class,'index']);
+
+/**
+ * CRUD PROJECTS
+ */
+Route::get('customers/{customerId}/invoices/{id}',[InvoiceController::class,'show']);
+Route::patch('customers/{customerId}/invoices/{id}',[InvoiceController::class,'update']);
+Route::delete('customers/{customerId}/invoices/{id}',[InvoiceController::class,'delete']);
+Route::post('customers/{customerId}/invoices',[InvoiceController::class,'create']);
+Route::get('customers/{customerId}/invoices',[InvoiceController::class,'index']);
 
