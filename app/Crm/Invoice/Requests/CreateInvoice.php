@@ -23,7 +23,9 @@ class CreateInvoice extends ApiRequest
     public function rules(): array
     {
         return [
-            //
+            'total' => 'required',
+            'items' => 'required',
+            'status' => 'required'
         ];
     }
 }
