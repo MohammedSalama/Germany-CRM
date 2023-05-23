@@ -6,7 +6,7 @@ namespace Crm\Note\Listeners;
 use Crm\Customer\Services\CustomerService;
 use Crm\Note\Events\NoteCreation;
 
-class SendProjectCreationEmail
+class SendNoteCreationEmail
 {
     /**
      * @var CustomerService
