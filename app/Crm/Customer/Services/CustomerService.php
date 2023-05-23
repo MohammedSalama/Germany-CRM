@@ -7,6 +7,7 @@ use Crm\Customer\Models\Customer;
 use Crm\Customer\Requests\CreateCustomer;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Redis;
 
 class CustomerService
 {
@@ -39,7 +40,10 @@ class CustomerService
         $customer->name	= $name;
         $customer->save();
 
+        Redis::enableEvents($customer);
+
         event(new CustomerCreation($customer));
+
         return $customer;
     }
 
