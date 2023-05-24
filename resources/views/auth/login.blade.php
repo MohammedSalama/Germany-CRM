@@ -16,7 +16,7 @@
                 <div class="col-lg-4 col-md-6 login-fancy-bg bg" style="background-image: url(Backend/images/login-inner-bg.jpg);">
                     <div class="login-fancy">
                         <h2 class="text-white mb-20">Hello world!</h2>
-                        <p class="mb-20 text-white">CRM Project</p>
+                        <p class="mb-20 text-white">CRM Germany</p>
                         <ul class="list-unstyled  pos-bot pb-30">
                             <li class="list-inline-item"><a class="text-white" href="#"> Terms of Use</a> </li>
                             <li class="list-inline-item"><a class="text-white" href="#"> Privacy Policy</a></li>
