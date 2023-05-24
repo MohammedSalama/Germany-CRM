@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\CustomerController;
 use App\Http\Controllers\Api\InvoiceController;
 use App\Http\Controllers\Api\NoteController;
 use App\Http\Controllers\Api\ProjectController;
+use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -69,5 +70,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('logout', [AuthController::class, 'logout']);
 });
 
+Route::post('users', [UserController::class,'create'] );
 
 
