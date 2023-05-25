@@ -64,10 +64,6 @@ class UserController extends Controller
      */
     public function logout(UserCreation $request)
     {
-        $user = $this->userService->logout($request);
-
-        return [
-            'message' => 'Logged Out'
-        ];
+        $this->userService->logout($request);
     }
 }

@@ -49,7 +49,7 @@ class UserService
 //        return response($response , 201);
 //    }
 
-    public function logout(UserCreation $request)
+    public function logout(Request $request)
     {
         auth()->user()->tokens()->delete();
 
