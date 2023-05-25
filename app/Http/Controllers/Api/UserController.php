@@ -7,7 +7,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Crm\User\Requests\UserCreation;
 use Crm\User\Services\UserService;
-use http\Env\Response;
+//use http\Env\Response;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -40,5 +40,34 @@ class UserController extends Controller
         ]
     );
 
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function login(UserCreation $request)
+    {
+        $user = $this->userService->login($request);
+
+        return response()->json([
+            'user' => $user,
+            'token' => $user->createToken(self::TOKEN_NAME)->plainTextToken
+        ]
+
+        );
+    }
+
+    /**
+     * @param Request $request
+     * @return string[]
+     */
+    public function logout(UserCreation $request)
+    {
+        $user = $this->userService->logout($request);
+
+        return [
+            'message' => 'Logged Out'
+        ];
     }
 }
