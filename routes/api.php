@@ -26,6 +26,12 @@ use Illuminate\Support\Facades\Route;
 //Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 
+/**
+ * Users Function
+ */
+Route::post('users', [UserController::class,'create'] );
+Route::post('users/login', [UserController::class, 'login']);
+
 Route::group(['middleware' => ['auth:sanctum']], function () {
 
     /**
@@ -45,8 +51,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('customers/{customerId}/notes/{id}',[NoteController::class,'show']);
     Route::patch('customers/{customerId}/notes/{id}',[NoteController::class,'update']);
     Route::delete('customers/{customerId}/notes/{id}',[NoteController::class,'delete']);
-    Route::post('customers/{customerId}/notes',[NoteController::class,'create']);
-    Route::get('customers/{customerId}/notes',[NoteController::class,'index']);
+        Route::post('customers/{customerId}/notes',[NoteController::class,'create']);
+        Route::get('customers/{customerId}/notes',[NoteController::class,'index']);
 
     /**
      * CRUD PROJECTS
@@ -54,8 +60,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('customers/{customerId}/projects/{id}',[ProjectController::class,'show']);
     Route::patch('customers/{customerId}/projects/{id}',[ProjectController::class,'update']);
     Route::delete('customers/{customerId}/projects/{id}',[ProjectController::class,'delete']);
-    Route::post('customers/{customerId}/projects',[ProjectController::class,'create']);
-    Route::get('customers/{customerId}/projects',[ProjectController::class,'index']);
+        Route::post('customers/{customerId}/projects',[ProjectController::class,'create']);
+        Route::get('customers/{customerId}/projects',[ProjectController::class,'index']);
 
     /**
      * CRUD PROJECTS
@@ -63,8 +69,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('customers/{customerId}/invoices/{id}',[InvoiceController::class,'show']);
     Route::patch('customers/{customerId}/invoices/{id}',[InvoiceController::class,'update']);
     Route::delete('customers/{customerId}/invoices/{id}',[InvoiceController::class,'delete']);
-    Route::post('customers/{customerId}/invoices',[InvoiceController::class,'create']);
-    Route::get('customers/{customerId}/invoices',[InvoiceController::class,'index']);
+        Route::post('customers/{customerId}/invoices',[InvoiceController::class,'create']);
+        Route::get('customers/{customerId}/invoices',[InvoiceController::class,'index']);
 
     /**
      * Logout Function
@@ -77,11 +83,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('users/logout', [UserController::class, 'logout']);
 });
 
-/**
- * Users Function
- */
-Route::post('users', [UserController::class,'create'] );
-Route::post('users/login', [UserController::class, 'login']);
+
 
 
 
