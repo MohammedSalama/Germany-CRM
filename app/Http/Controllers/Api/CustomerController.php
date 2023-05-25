@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Crm\Customer\Models\Customer;
 use Crm\Customer\Requests\CreateCustomer;
+use Crm\Customer\Services\CustomerExportService;
 use Crm\Customer\Services\CustomerService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -17,11 +18,18 @@ class CustomerController extends Controller
     private CustomerService $customerService;
 
     /**
-     * @param CustomerService $customerService
+     * @var CustomerExportService
      */
-    public function __construct(CustomerService $customerService)
+    private CustomerExportService $customerExportService;
+
+    /**
+     * @param CustomerService $customerService
+     * @param CustomerExportService $customerExportService
+     */
+    public function __construct(CustomerService $customerService, CustomerExportService $customerExportService)
     {
         $this->customerService = $customerService;
+        $this->customerExportService = $customerExportService;
     }
 
     /**
@@ -70,5 +78,16 @@ class CustomerController extends Controller
     public function delete(Request $request, $id)
     {
        return $this->customerService->delete($request, (int) $id);
+    }
+
+    /**
+     * @param Request $request
+     * @return void
+     * @throws \Crm\Customer\Exceptions\InvalidExportFormat
+     */
+    public function export(Request $request)
+    {
+//        dd($request->get('format','json'));
+        return $this->customerExportService->export($request->get('format','json'));
     }
 }

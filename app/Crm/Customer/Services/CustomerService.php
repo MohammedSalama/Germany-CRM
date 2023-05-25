@@ -4,6 +4,7 @@ namespace Crm\Customer\Services;
 
 use Crm\Customer\Events\CustomerCreation;
 use Crm\Customer\Models\Customer;
+use Crm\Customer\Repositories\CustomerRepository;
 use Crm\Customer\Requests\CreateCustomer;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -12,12 +13,28 @@ use Illuminate\Support\Facades\Redis;
 class CustomerService
 {
     /**
+     * @var CustomerRepository
+     */
+    private CustomerRepository $customerRepository;
+
+    /**
+     * @param CustomerRepository $customerRepository
+     */
+    public function __construct(CustomerRepository $customerRepository)
+    {
+        $this->customerRepository = $customerRepository;
+    }
+
+    /**
      * @param Request $request
      * @return \Illuminate\Database\Eloquent\Collection
      */
     public function index(Request $request)
     {
-        return Customer::all();
+        return [
+            'statistics' => $this->customerRepository->customerAnalytics(),
+            'customer' => $this->customerRepository->all()
+        ];
     }
 
     /**
@@ -26,7 +43,10 @@ class CustomerService
      */
     public function show($id)
     {
-        return Customer::find($id);
+        return [
+            'statistics' => $this->customerRepository->customerAnalytics(),
+            'customer' => $this->customerRepository->find($id)
+        ];
     }
 
     /**
@@ -35,16 +55,14 @@ class CustomerService
      */
     public function create(string $name)
     {
-//        dd($request->all());
-        $customer = new Customer();
-        $customer->name	= $name;
-        $customer->save();
+        // dd($request->all());
+        return [
+            'statistics' => $this->customerRepository->customerAnalytics(),
+            'customer' => $this->customerRepository->create([
+                'name' => $name
+            ])
+        ];
 
-        Redis::enableEvents($customer);
-
-        event(new CustomerCreation($customer));
-
-        return $customer;
     }
 
     /**
