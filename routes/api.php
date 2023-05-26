@@ -32,6 +32,9 @@ Route::post('login', [AuthController::class, 'login']);
 Route::post('users', [UserController::class,'create'] );
 Route::post('users/login', [UserController::class, 'login']);
 
+/**
+ * Middleware Group
+ */
 Route::group(['middleware' => ['auth:sanctum']], function () {
 
     /**
@@ -81,6 +84,11 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
      * Users Function
      */
     Route::post('users/logout', [UserController::class, 'logout']);
+
+//    /**
+//     * User Location
+//     */
+//    Route::get('display-user', [App\Http\Controllers\UserController::class, 'index']);
 });
 
 
