@@ -23,26 +23,12 @@ class CustomerExportService
     }
 
     /**
-     * @param string $format
+     * @param ExportInterface $exporter
      * @return void
-     * @throws InvalidExportFormat
      */
-    public function export(string $format)
+    public function export(ExportInterface $exporter)
     {
         $customer = $this->customerRepository->all();
-
-        $handler = config('export.exporter')[$format] ?? null;
-
-//        dd($handler);
-
-        if (! $handler) {
-            throw new InvalidExportFormat(sprintf('format %s is not supported', $format));
-        }
-
-        $exporter = new $handler;
-
-        if ($exporter instanceof ExportInterface) {
-            $exporter->export($customer->toArray());
-        }
+        $exporter->export($customer->toArray());
     }
 }
