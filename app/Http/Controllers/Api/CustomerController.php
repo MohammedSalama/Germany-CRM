@@ -7,6 +7,8 @@ use Crm\Customer\Models\Customer;
 use Crm\Customer\Requests\CreateCustomer;
 use Crm\Customer\Services\CustomerExportService;
 use Crm\Customer\Services\CustomerService;
+use Crm\Customer\Services\Export\ExportFactory;
+use Crm\Customer\Services\Export\ExportInterface;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -88,6 +90,8 @@ class CustomerController extends Controller
     public function export(Request $request)
     {
 //        dd($request->get('format','json'));
-        return $this->customerExportService->export($request->get('format','json'));
+        $format = $request->get('format','json');
+        $exporter = ExportFactory::instance($format);
+        return $this->customerExportService->export($exporter);
     }
 }
