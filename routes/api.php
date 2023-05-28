@@ -85,10 +85,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
      */
     Route::post('users/logout', [UserController::class, 'logout']);
 
-//    /**
-//     * User Location
-//     */
-//    Route::get('display-user', [App\Http\Controllers\UserController::class, 'index']);
 });
 
 

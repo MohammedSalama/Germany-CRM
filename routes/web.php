@@ -14,8 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('display-user', [UserController::class, 'index']);
-
 Route::get('/', function () {
     return view('auth.login');
 });
