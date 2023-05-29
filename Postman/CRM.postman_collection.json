@@ -14,6 +14,20 @@
 					"item": [
 						{
 							"name": "Export Customer",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"pm.collectionVariables.unset(\"variable_key\");"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"protocolProfileBehavior": {
 								"disabledSystemHeaders": {
 									"accept": true
@@ -25,7 +39,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "4|Vp1tzOoH6MmhVMhlVfEJWhmnn75wx3MCji0JqiTz",
+											"value": "{{base_token}}",
 											"type": "string"
 										}
 									]
@@ -39,7 +53,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{base_url}}/customers/export?format=excel",
+									"raw": "{{base_url}}/customers/export?format=pdf",
 									"host": [
 										"{{base_url}}"
 									],
@@ -49,13 +63,8 @@
 									],
 									"query": [
 										{
-											"key": "",
-											"value": null,
-											"disabled": true
-										},
-										{
 											"key": "format",
-											"value": "excel"
+											"value": "pdf"
 										}
 									]
 								}
@@ -88,7 +97,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "4|Vp1tzOoH6MmhVMhlVfEJWhmnn75wx3MCji0JqiTz",
+									"value": "{{base_token}}",
 									"type": "string"
 								}
 							]
@@ -118,13 +127,26 @@
 				},
 				{
 					"name": "CustomerById",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "4|Vp1tzOoH6MmhVMhlVfEJWhmnn75wx3MCji0JqiTz",
+									"value": "{{base_token}}",
 									"type": "string"
 								}
 							]
@@ -146,13 +168,26 @@
 				},
 				{
 					"name": "CreateCustomer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "4|Vp1tzOoH6MmhVMhlVfEJWhmnn75wx3MCji0JqiTz",
+									"value": "{{base_token}}",
 									"type": "string"
 								}
 							]
@@ -252,7 +287,30 @@
 			"item": [
 				{
 					"name": "allCustomersNotes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{base_token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -272,6 +330,16 @@
 				{
 					"name": "CustomerNotesById",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{base_token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -623,47 +691,6 @@
 					"response": []
 				},
 				{
-					"name": "CreateCustomerInvoice",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 200\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"total\": 30.50,\r\n    \"items\": 9,\r\n    \"status\" : 0\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{base_url}}/customers/2/invoices",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"customers",
-								"2",
-								"invoices"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "DeleteCustomerInvoice",
 					"event": [
 						{
@@ -720,6 +747,47 @@
 								"2",
 								"invoices",
 								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateCustomerInvoice",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"total\": 30.50,\r\n    \"items\": 9,\r\n    \"status\" : 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/customers/2/invoices",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"customers",
+								"2",
+								"invoices"
 							]
 						}
 					},
