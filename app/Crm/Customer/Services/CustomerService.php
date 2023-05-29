@@ -57,9 +57,9 @@ class CustomerService
     {
         // dd($request->all());
         return [
-            'statistics' => $this->customerRepository->customerAnalytics(),
-            'customer' => $this->customerRepository->create([
-                'name' => $name
+            'statistics'  => $this->customerRepository->customerAnalytics(),
+            'customer'    => $this->customerRepository->create([
+                'name'    => $name
             ])
         ];
 

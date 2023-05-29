@@ -2,16 +2,22 @@
 
 namespace Crm\Base;
 
+use Illuminate\Http\JsonResponse;
+
 class ResponseBuilder
 {
     /**
      * @var int
      */
-    private int $statusCode;
+    private int $statusCode = 200;
     private $data = null;
     private array $errors = [];
-    private string $status;
+    private string $status = 'success';
     private array $meta = [];
+
+    const STATUS_SUCCESS = 'success';
+    const STATUS_ERROR = 'error';
+
 
     /**
      * @return int
@@ -103,5 +109,24 @@ class ResponseBuilder
     {
         $this->meta = $meta;
         return $this;
+    }
+
+    /**
+     * @return JsonResponse
+     */
+    public function response()
+    {
+        $response = [];
+
+        if ($this->getStatus() !== JsonResponse::HTTP_OK && !empty($this->getErrors())) {
+            $response['errors'] = $this->getErrors();
+        }
+        $response['status'] = $this->getStatus();
+
+        if ($this->getStatus() === self::STATUS_SUCCESS) {
+            $response['data'] = $this->getData();
+        }
+
+        return response()->json($response , $this->getStatusCode());
     }
 }

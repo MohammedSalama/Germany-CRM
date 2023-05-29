@@ -12,6 +12,7 @@ use Crm\Customer\Services\Export\ExportInterface;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
+
 class CustomerController extends Controller
 {
     /**
@@ -40,6 +41,10 @@ class CustomerController extends Controller
      */
     public function index(Request $request)
     {
+//        $customer = $this->customerService->index($request);
+//        return responseBuilder()
+//            ->setData($customer)
+//            ->response();
         return $this->customerService->index($request);
     }
 
