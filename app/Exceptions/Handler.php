@@ -22,7 +22,7 @@ class Handler extends ExceptionHandler
     ];
 
     /**
-     * Register the exception handling callbacks for the application.
+     * @return void
      */
     public function register(): void
     {
@@ -37,9 +37,8 @@ class Handler extends ExceptionHandler
 
         $this->renderable(function (Throwable $e) {
 
-            if (env('APP_ENV') === 'local') {
-                Log::error($e);
-            }
+            Log::error($e);
+
             return response()->json([
                 "status" => "error",
                 'errors' => ['generic' =>'Unknown error , please try again later']
