@@ -14,13 +14,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+/**
+ * Authentication
+ */
 Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::get('/adminDashboard', function () {
-    return view('Backend.adminDashboard');
-})->middleware(['auth', 'verified'])->name('adminDashboard');
+Route::group(['middleware' => ['web']], function () {
+
+
+    Route::get('/adminDashboard', function () {
+        return view('Backend.adminDashboard');
+    })->name('adminDashboard');
+
+
+});
+
 
 
 require __DIR__.'/auth.php';
