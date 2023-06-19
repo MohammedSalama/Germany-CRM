@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace {{ namespace }};
 
 use Illuminate\Broadcasting\Channel;
@@ -14,22 +12,25 @@ use Illuminate\Queue\SerializesModels;
 
 class {{ class }}
 {
-    use Dispatchable;
-    use SerializesModels;
-    use InteractsWithSockets;
+    use Dispatchable, InteractsWithSockets, SerializesModels;
 
     /**
-     * @return void
+     * Create a new event instance.
      */
-    public function __construct(
-        //
-    ) {}
-
-    /**
-     * @return \Illuminate\Broadcasting\Channel|array
-     */
-    public function broadcastOn(): Illuminate\Broadcasting\Channel|array
+    public function __construct()
     {
-        return new PrivateChannel('channel-name');
+        //
+    }
+
+    /**
+     * Get the channels the event should broadcast on.
+     *
+     * @return array<int, \Illuminate\Broadcasting\Channel>
+     */
+    public function broadcastOn(): array
+    {
+        return [
+            new PrivateChannel('channel-name'),
+        ];
     }
 }

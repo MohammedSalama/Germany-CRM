@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace {{ namespace }};
 
 use {{ namespacedModel }};
@@ -9,8 +7,7 @@ use {{ namespacedModel }};
 class {{ class }}
 {
     /**
-     * @param  \{{ namespacedModel }}  ${{ modelVariable }}
-     * @return void
+     * Handle the {{ model }} "created" event.
      */
     public function created({{ model }} ${{ modelVariable }}): void
     {
@@ -18,8 +15,7 @@ class {{ class }}
     }
 
     /**
-     * @param  \{{ namespacedModel }}  ${{ modelVariable }}
-     * @return void
+     * Handle the {{ model }} "updated" event.
      */
     public function updated({{ model }} ${{ modelVariable }}): void
     {
@@ -27,8 +23,7 @@ class {{ class }}
     }
 
     /**
-     * @param  \{{ namespacedModel }}  ${{ modelVariable }}
-     * @return void
+     * Handle the {{ model }} "deleted" event.
      */
     public function deleted({{ model }} ${{ modelVariable }}): void
     {
@@ -36,8 +31,7 @@ class {{ class }}
     }
 
     /**
-     * @param  \{{ namespacedModel }}  ${{ modelVariable }}
-     * @return void
+     * Handle the {{ model }} "restored" event.
      */
     public function restored({{ model }} ${{ modelVariable }}): void
     {
@@ -45,8 +39,7 @@ class {{ class }}
     }
 
     /**
-     * @param  \{{ namespacedModel }}  ${{ modelVariable }}
-     * @return void
+     * Handle the {{ model }} "force deleted" event.
      */
     public function forceDeleted({{ model }} ${{ modelVariable }}): void
     {

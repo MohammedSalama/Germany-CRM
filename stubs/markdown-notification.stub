@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace {{ namespace }};
 
 use Illuminate\Bus\Queueable;
@@ -14,35 +12,37 @@ class {{ class }} extends Notification
     use Queueable;
 
     /**
-     * @return void
+     * Create a new notification instance.
      */
-    public function __construct(
+    public function __construct()
+    {
         //
-    ) {}
+    }
 
     /**
-     * @param  mixed  $notifiable
-     * @return array
+     * Get the notification's delivery channels.
+     *
+     * @return array<int, string>
      */
-    public function via($notifiable): array
+    public function via(object $notifiable): array
     {
         return ['mail'];
     }
 
     /**
-     * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
+     * Get the mail representation of the notification.
      */
-    public function toMail($notifiable): Illuminate\Notifications\Messages\MailMessage
+    public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)->markdown('{{ view }}');
     }
 
     /**
-     * @param  mixed  $notifiable
-     * @return array
+     * Get the array representation of the notification.
+     *
+     * @return array<string, mixed>
      */
-    public function toArray($notifiable): array
+    public function toArray(object $notifiable): array
     {
         return [
             //

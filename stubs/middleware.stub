@@ -1,20 +1,19 @@
 <?php
 
-declare(strict_types=1);
-
 namespace {{ namespace }};
 
 use Closure;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class {{ class }}
 {
     /**
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
-     * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
+     * Handle an incoming request.
+     *
+     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next): Illuminate\Http\Response|Illuminate\Http\RedirectResponse
+    public function handle(Request $request, Closure $next): Response
     {
         return $next($request);
     }
